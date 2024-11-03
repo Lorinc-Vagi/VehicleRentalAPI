@@ -6,7 +6,7 @@ using VehicleRentalAPI.Entities;
 
 namespace VehicleRentalAPI.Controllers
 {
-    [Route("api/Rentals")]
+    [Route("api/[controller]")]
     [ApiController]
     public class RentalsController : ControllerBase
     {
@@ -18,7 +18,7 @@ namespace VehicleRentalAPI.Controllers
         }
         [HttpPost]
         [Route("create-rental")]
-        public async Task<ActionResult<Rental>> create([FromBody] Rental rental)
+        public async Task<ActionResult<Rental>> createRental([FromBody] Rental rental)
         {
             context.Rentals.Add(rental);
             await context.SaveChangesAsync();
@@ -26,13 +26,13 @@ namespace VehicleRentalAPI.Controllers
         }
         [HttpGet]
         [Route("get-rentals")]
-        public async Task<ActionResult<IEnumerable<Rental>>> getall()
+        public async Task<ActionResult<IEnumerable<Rental>>> getallRental()
         {
             return await context.Rentals.ToListAsync();
         }
         [HttpGet]
         [Route("get-rental/{id}")]
-        public async Task<ActionResult<Rental>> getOne(int id)
+        public async Task<ActionResult<Rental>> getOneRental(int id)
         {
             var toDisplay = await context.Rentals.FindAsync(id);
             if (toDisplay is null)
@@ -43,7 +43,7 @@ namespace VehicleRentalAPI.Controllers
         }
         [HttpPut]
         [Route("update-rental/{id}")]
-        public async Task<IActionResult> update(int id, [FromBody] Rental rental)
+        public async Task<IActionResult> updateRental(int id, [FromBody] Rental rental)
         {
             if (id != rental.Id)
             {
@@ -59,7 +59,7 @@ namespace VehicleRentalAPI.Controllers
         }
         [HttpDelete]
         [Route("delete-rental/{id}")]
-        public async Task<IActionResult> delete(int id)
+        public async Task<IActionResult> deleteRental(int id)
         {
             var toDelete = await context.Rentals.FindAsync(id);
             if (toDelete is null)

@@ -18,7 +18,7 @@ namespace VehicleRentalAPI.Controllers
         }
         [HttpPost]
         [Route("create-customer")]
-        public async Task<ActionResult<Customer>> create([FromBody] Customer customer)
+        public async Task<ActionResult<Customer>> createCustomer([FromBody] Customer customer)
         {
             context.Customers.Add(customer);
             await context.SaveChangesAsync();
@@ -26,13 +26,13 @@ namespace VehicleRentalAPI.Controllers
         }
         [HttpGet]
         [Route("get-customers")]
-        public async Task<ActionResult<IEnumerable<Customer>>> getall()
+        public async Task<ActionResult<IEnumerable<Customer>>> getallCustomer()
         {
             return await context.Customers.ToListAsync();
         }
         [HttpGet]
         [Route("get-customer/{id}")]
-        public async Task<ActionResult<Customer>> getOne(int id)
+        public async Task<ActionResult<Customer>> getOneCustomer(int id)
         {
             var toDisplay = await context.Customers.FindAsync(id);
             if (toDisplay is null)
@@ -43,7 +43,7 @@ namespace VehicleRentalAPI.Controllers
         }
         [HttpPut]
         [Route("update-customer/{id}")]
-        public async Task<IActionResult> update(int id, [FromBody]Customer customer)
+        public async Task<IActionResult> updateCustomer(int id, [FromBody]Customer customer)
         {
             if (id!=customer.Id)
             {
@@ -59,7 +59,7 @@ namespace VehicleRentalAPI.Controllers
         }
         [HttpDelete]
         [Route("delete-customer/{id}")]
-        public async Task<IActionResult> delete(int id)
+        public async Task<IActionResult> deleteCustomer(int id)
         {
             var toDelete = await context.Customers.FindAsync(id);
             if (toDelete is null)
